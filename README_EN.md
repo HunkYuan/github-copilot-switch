@@ -57,7 +57,7 @@ python copilot_switch.py
 # Open http://127.0.0.1:5000 in your browser
 ```
 
-Or double-click `run.bat` (auto-installs dependencies, starts server, opens browser).
+Or double-click `cpss.bat` (auto-installs dependencies, starts server, opens browser).
 
 ### CLI Launch
 
@@ -151,7 +151,7 @@ copilot-switch/
 ├── copilot_switch.py       # Flask backend (config CRUD)
 ├── cps.py                  # CLI launcher (launches copilot with active config)
 ├── cps.bat                 # Windows batch wrapper for CLI launcher
-├── run.bat                 # One-click GUI startup
+├── cpss.bat                 # One-click GUI startup
 ├── requirements.txt        # Python dependencies
 ├── BYOK_Usage_Guide.md     # BYOK usage guide (Chinese)
 ├── templates/
@@ -204,7 +204,7 @@ A: Keys are stored locally in `~/.copilot/providers.json`. The web UI listens on
 A: Add multiple providers and click **Activate** to switch between them. All configurations are stored in a single JSON file.
 
 **Q: Can I use this on Linux/macOS?**  
-A: The core Python app works cross-platform. The `run.bat` and `cps.bat` scripts are Windows-specific — use `python copilot_switch.py` and `python cps.py` directly on other platforms.
+A: The core Python app works cross-platform. The `cpss.bat` and `cps.bat` scripts are Windows-specific — use `python copilot_switch.py` and `python cps.py` directly on other platforms.
 
 ## 📄 License
 

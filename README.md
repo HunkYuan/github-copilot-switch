@@ -57,7 +57,7 @@ python copilot_switch.py
 # 浏览器打开 http://127.0.0.1:5000
 ```
 
-或者双击 `run.bat`（自动安装依赖 + 启动服务 + 打开浏览器）。
+或者双击 `cpss.bat`（自动安装依赖 + 启动服务 + 打开浏览器）。
 
 ### 命令行启动
 
@@ -151,7 +151,7 @@ copilot-switch/
 ├── copilot_switch.py       # Flask 后端（配置 CRUD + 启动 API）
 ├── cps.py                  # CLI 启动器（直接以激活配置启动 copilot）
 ├── cps.bat                 # Windows 批处理包装器
-├── run.bat                 # 一键启动 GUI
+├── cpss.bat                 # 一键启动 GUI
 ├── requirements.txt        # Python 依赖
 ├── BYOK_Usage_Guide.md     # Copilot CLI BYOK 使用说明
 ├── templates/
@@ -188,7 +188,7 @@ copilot-switch/
 ## ❓ 常见问题
 
 **Q: 启动后终端显示乱码？**  
-A: 确保终端编码为 UTF-8，`run.bat` 已自动设置 `chcp 65001`。
+A: 确保终端编码为 UTF-8，`cpss.bat` 已自动设置 `chcp 65001`。
 
 **Q: cps 命令找不到？**  
 A: 需将 `copilot-switch` 目录加入系统 PATH。运行：
