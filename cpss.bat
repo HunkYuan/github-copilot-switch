@@ -1,4 +1,7 @@
 @echo off
+%~d0
+CD  %~dp0
+
 chcp 65001 >nul 2>&1
 echo ================================================
 echo   Copilot Switch - BYOK Config Manager
