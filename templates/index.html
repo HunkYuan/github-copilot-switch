@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Copilot Switch</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>🔀 Copilot Switch</h1>
+      <p class="subtitle">BYOK 配置管理器 — 管理多个 LLM 提供商，一键启动 Copilot CLI</p>
+    </header>
+
+    <div class="toolbar">
+      <button id="btn-add" class="btn btn-primary">+ 添加配置</button>
+    </div>
+
+    <div id="provider-list" class="provider-list">
+      <div class="empty-state">
+        <p>暂无配置，点击「+ 添加配置」开始</p>
+        <p class="hint">激活配置后，在终端运行 <code>cps</code> 启动 Copilot CLI</p>
+      </div>
+    </div>
+
+    <div class="preview-section" id="preview-section">
+      <h3>📋 当前配置预览</h3>
+      <div id="preview-content">
+        <p class="preview-empty">选择一个激活的配置来预览环境变量</p>
+      </div>
+    </div>
+
+    <div id="status-bar"></div>
+  </div>
+
+  <!-- 编辑模态框 -->
+  <div id="modal-overlay" class="modal-overlay hidden">
+    <div class="modal">
+      <div class="modal-header">
+        <h2 id="modal-title">添加配置</h2>
+        <button class="btn-close" id="btn-close-modal">&times;</button>
+      </div>
+      <form id="provider-form">
+        <input type="hidden" id="edit-id" value="">
+        <label>名称 <span class="required">*</span></label>
+        <input type="text" id="f-name" placeholder="例如：OpenAI GPT-4o" required>
+
+        <label>提供商类型</label>
+        <select id="f-type">
+          <option value="openai">openai（OpenAI / Ollama / vLLM 等）</option>
+          <option value="azure">azure（Azure OpenAI）</option>
+          <option value="anthropic">anthropic（Anthropic Claude）</option>
+        </select>
+
+        <label>Base URL <span class="required">*</span></label>
+        <input type="text" id="f-base-url" placeholder="例如：https://api.openai.com/v1" required>
+
+        <label>API Key</label>
+        <div class="input-with-eye">
+          <input type="password" id="f-api-key" placeholder="sk-..." autocomplete="off">
+          <button type="button" class="btn-eye" id="btn-toggle-key" title="显示/隐藏">👁</button>
+        </div>
+
+        <label>模型名称 <span class="required">*</span></label>
+        <input type="text" id="f-model" placeholder="例如：gpt-4o / claude-sonnet-4-5" required>
+
+        <label>Max Output Tokens <span class="hint-text">(默认 128000)</span></label>
+        <input type="number" id="f-max-output-tokens" placeholder="128000" min="1">
+
+        <label>Max Prompt Tokens <span class="hint-text">(默认 840000)</span></label>
+        <input type="number" id="f-max-prompt-tokens" placeholder="840000" min="1">
+
+        <label class="checkbox-label">
+          <input type="checkbox" id="f-offline"> 启用脱机模式
+        </label>
+
+        <div class="modal-preview">
+          <h4>📋 环境变量预览</h4>
+          <pre id="modal-preview-content">请填写表单...</pre>
+        </div>
+
+        <div class="modal-actions">
+          <button type="button" class="btn btn-secondary" id="btn-cancel">取消</button>
+          <button type="submit" class="btn btn-primary">保存</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>
