@@ -14,8 +14,8 @@
 ## ✨ 功能
 
 - **Web GUI** — 浏览器访问，可视化增删改查多套提供商配置
-- **一键启动** — `cps` 命令直接从终端以激活的配置启动
-- **CLI 启动器** — `cps` 命令直接从终端以激活的配置启动
+- **一键启动** — `cps` 命令列出所有配置并选择后启动 Copilot CLI
+- **CLI 启动器** — `cps` 命令支持交互式选择 provider
 - **多提供商** — 支持 OpenAI 兼容端点、Azure OpenAI、Anthropic
 - **脱机模式** — 支持本地模型（Ollama、vLLM 等）
 - **API Key 保护** — 密码框 + 👁 切换明文，配置持久化时有掩码
@@ -57,7 +57,7 @@ python copilot_switch.py
 # 浏览器打开 http://127.0.0.1:5000
 ```
 
-或者双击 `cpss.bat`（自动安装依赖 + 启动服务 + 打开浏览器）。
+或者双击 `run.bat`（自动安装依赖 + 启动服务 + 打开浏览器）。
 
 ### 命令行启动
 
@@ -66,7 +66,7 @@ python copilot_switch.py
 setx PATH "%PATH%;E:\copilot_switch"
 
 # 之后在任意终端：
-cps              # 以激活的配置启动 Copilot CLI
+cps              # 列出所有 Provider，选择后启动 Copilot CLI
 cps --print      # 查看当前激活的配置
 ```
 
@@ -94,10 +94,22 @@ cps --print      # 查看当前激活的配置
 
 ### 3. 启动 Copilot
 
-在任意终端运行：
+在任意终端运行 `cps`，会列出所有已配置的 Provider，当前激活的会用 `*` 标记。按回车确认默认选择，或输入数字切换到其他 Provider：
+
+```
+可用 Provider 列表：
+
+   [1] Provider A (openai)
+ * [2] Provider B (anthropic)
+   [3] Provider C (openai)
+
+[*] 表示当前激活的配置
+
+请选择 Provider [直接回车使用默认*2]: _
+```
 
 ```bash
-cps              # 以激活的配置启动 Copilot CLI
+cps              # 交互式选择 Provider 后启动 Copilot CLI
 cps --print      # 查看当前激活的配置
 ```
 
@@ -149,9 +161,9 @@ cps --print      # 查看当前激活的配置
 ```
 copilot-switch/
 ├── copilot_switch.py       # Flask 后端（配置 CRUD + 启动 API）
-├── cps.py                  # CLI 启动器（直接以激活配置启动 copilot）
+├── cps.py                  # CLI 启动器（交互式选择 Provider + 启动 Copilot）
 ├── cps.bat                 # Windows 批处理包装器
-├── cpss.bat                 # 一键启动 GUI
+├── run.bat                 # 一键启动 GUI
 ├── requirements.txt        # Python 依赖
 ├── BYOK_Usage_Guide.md     # Copilot CLI BYOK 使用说明
 ├── templates/
@@ -188,7 +200,7 @@ copilot-switch/
 ## ❓ 常见问题
 
 **Q: 启动后终端显示乱码？**  
-A: 确保终端编码为 UTF-8，`cpss.bat` 已自动设置 `chcp 65001`。
+A: 确保终端编码为 UTF-8，`run.bat` 已自动设置 `chcp 65001`。
 
 **Q: cps 命令找不到？**  
 A: 需将 `copilot-switch` 目录加入系统 PATH。运行：
