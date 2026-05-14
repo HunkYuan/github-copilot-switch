@@ -10,8 +10,13 @@
   <div class="container">
     <header>
       <h1>🔀 Copilot Switch</h1>
-      <p class="subtitle">BYOK 配置管理器 — 管理多个 LLM 提供商，一键启动 Copilot CLI</p>
+      <p class="subtitle">BYOK 配置管理器 — 管理多个 LLM 提供商，一键启动 CLI</p>
     </header>
+
+    <nav class="tab-bar">
+      <button class="tab-btn active" data-tool="copilot">🤖 Copilot</button>
+      <button class="tab-btn" data-tool="claude">🧠 Claude</button>
+    </nav>
 
     <div class="toolbar">
       <button id="btn-add" class="btn btn-primary">+ 添加配置</button>
@@ -46,12 +51,15 @@
         <label>名称 <span class="required">*</span></label>
         <input type="text" id="f-name" placeholder="例如：OpenAI GPT-4o" required>
 
-        <label>提供商类型</label>
-        <select id="f-type">
-          <option value="openai">openai（OpenAI / Ollama / vLLM 等）</option>
-          <option value="azure">azure（Azure OpenAI）</option>
-          <option value="anthropic">anthropic（Anthropic Claude）</option>
-        </select>
+        <!-- Copilot 专属字段 -->
+        <div id="copilot-fields">
+          <label>提供商类型</label>
+          <select id="f-type">
+            <option value="openai">openai（OpenAI / Ollama / vLLM 等）</option>
+            <option value="azure">azure（Azure OpenAI）</option>
+            <option value="anthropic">anthropic（Anthropic Claude）</option>
+          </select>
+        </div>
 
         <label>Base URL <span class="required">*</span></label>
         <input type="text" id="f-base-url" placeholder="例如：https://api.openai.com/v1" required>
@@ -65,15 +73,34 @@
         <label>模型名称 <span class="required">*</span></label>
         <input type="text" id="f-model" placeholder="例如：gpt-4o / claude-sonnet-4-5" required>
 
-        <label>Max Output Tokens <span class="hint-text">(默认 128000)</span></label>
-        <input type="number" id="f-max-output-tokens" placeholder="128000" min="1">
+        <!-- Copilot 专属字段 -->
+        <div id="copilot-fields-2">
+          <label>Max Output Tokens <span class="hint-text">(默认 128000)</span></label>
+          <input type="number" id="f-max-output-tokens" placeholder="128000" min="1">
 
-        <label>Max Prompt Tokens <span class="hint-text">(默认 840000)</span></label>
-        <input type="number" id="f-max-prompt-tokens" placeholder="840000" min="1">
+          <label>Max Prompt Tokens <span class="hint-text">(默认 840000)</span></label>
+          <input type="number" id="f-max-prompt-tokens" placeholder="840000" min="1">
 
-        <label class="checkbox-label">
-          <input type="checkbox" id="f-offline"> 启用脱机模式
-        </label>
+          <label class="checkbox-label">
+            <input type="checkbox" id="f-offline"> 启用脱机模式
+          </label>
+        </div>
+
+        <!-- Claude 专属字段 -->
+        <div id="claude-fields" style="display:none;">
+          <label>Default Sonnet Model <span class="hint-text">(留空则使用模型名称)</span></label>
+          <input type="text" id="f-sonnet-model" placeholder="例如：claude-sonnet-4-5">
+
+          <label>Default Opus Model <span class="hint-text">(留空则使用模型名称)</span></label>
+          <input type="text" id="f-opus-model" placeholder="例如：claude-opus-4-5">
+
+          <label>Default Haiku Model <span class="hint-text">(留空则使用模型名称)</span></label>
+          <input type="text" id="f-haiku-model" placeholder="例如：claude-haiku-4-5">
+
+          <label class="checkbox-label">
+            <input type="checkbox" id="f-disable-nonessential" checked> 禁用非必要流量
+          </label>
+        </div>
 
         <div class="modal-preview">
           <h4>📋 环境变量预览</h4>
