@@ -1,9 +1,10 @@
 """
-Copilot Switch CLI Launcher — 直接以 GUI 中激活的配置启动 Copilot CLI
+Claude Switch CLI Launcher — 直接以 GUI 中激活的配置启动 Claude CLI
 
 用法:
-    python cps.py           # 启动 copilot
-    python cps.py --print   # 仅打印激活的配置，不启动
+    python claudes.py                # 启动 claude
+    python claudes.py --help         # 传递参数给 claude
+    python claudes.py -p "写一个hello world"  # 传递参数给 claude
 """
 import json
 import os
@@ -77,7 +78,10 @@ def select_provider():
             print("[ERROR] 请输入数字")
 
 
-def launch(provider):
+def launch(provider, args=None):
+    if args is None:
+        args = []
+
     env = os.environ.copy()
     env["ANTHROPIC_BASE_URL"] = provider["base_url"]
     model = provider["model"]
@@ -99,7 +103,7 @@ def launch(provider):
     print(f"  Base URL: {provider['base_url'] or model}")
     print()
 
-    subprocess.run(["claude"], env=env)
+    subprocess.run(["claude"] + args, env=env)
 
 
 if __name__ == "__main__":
@@ -107,16 +111,4 @@ if __name__ == "__main__":
         sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 
     provider = select_provider()
-
-    if "--print" in sys.argv:
-        print(f"Active: {provider['name']}")
-        print(f"  Type:      {provider.get('type', 'openai')}")
-        print(f"  Base URL:  {provider['base_url']}")
-        print(f"  Model:     {provider['model']}")
-        print(f"  API Key:   {'***' if provider.get('api_key') else '(none)'}")
-        print(f"  Sonnet Model: {provider['model'] or model}")
-        print(f"  OPUS Model: {provider['model'] or model}")
-        print(f"  HAIKU Model: {provider['model'] or model}")
-        print(f"  Base URL: {provider['base_url'] or model}")
-    else:
-        launch(provider)
+    launch(provider, sys.argv[1:])

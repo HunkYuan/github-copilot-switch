@@ -82,9 +82,9 @@ setx PATH "%PATH%;E:\copilot_switch"
 
 # Then from any terminal:
 cps              # List all providers, select one, then launch Copilot CLI
-cps --print      # Show the currently active Copilot configuration
+cps --help       # Pass arguments to Copilot CLI
 claudes          # List all providers, select one, then launch Claude Code
-claudes --print  # Show the currently active Claude configuration
+claudes --help   # Pass arguments to Claude Code
 ```
 
 ## 📖 Usage Guide
@@ -140,9 +140,9 @@ Select a provider [press Enter to use default*2]: _
 
 ```bash
 cps              # Interactive provider selection, then launch Copilot CLI
-cps --print      # Show the currently active Copilot configuration
+cps --help       # Pass arguments to Copilot CLI
 claudes          # Interactive provider selection, then launch Claude Code
-claudes --print  # Show the currently active Claude configuration
+claudes --help   # Pass arguments to Claude Code
 ```
 
 ### Example Configurations

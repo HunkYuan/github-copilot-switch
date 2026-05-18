@@ -82,9 +82,9 @@ setx PATH "%PATH%;E:\copilot_switch"
 
 # 之后在任意终端：
 cps              # 列出所有 Provider，选择后启动 Copilot CLI
-cps --print      # 查看当前激活的 Copilot 配置
+cps --help       # 传递参数给 Copilot CLI
 claudes          # 列出所有 Provider，选择后启动 Claude Code
-claudes --print  # 查看当前激活的 Claude 配置
+claudes --help   # 传递参数给 Claude Code
 ```
 
 ## 📖 使用指南
@@ -140,9 +140,9 @@ claudes --print  # 查看当前激活的 Claude 配置
 
 ```bash
 cps              # 交互式选择 Provider 后启动 Copilot CLI
-cps --print      # 查看当前激活的 Copilot 配置
+cps --help       # 传递参数给 Copilot CLI
 claudes          # 交互式选择 Provider 后启动 Claude Code
-claudes --print  # 查看当前激活的 Claude 配置
+claudes --help   # 传递参数给 Claude Code
 ```
 
 ### 配置示例

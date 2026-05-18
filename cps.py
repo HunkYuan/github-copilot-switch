@@ -2,8 +2,9 @@
 Copilot Switch CLI Launcher — 直接以 GUI 中激活的配置启动 Copilot CLI
 
 用法:
-    python cps.py           # 启动 copilot
-    python cps.py --print   # 仅打印激活的配置，不启动
+    python cps.py                # 启动 copilot
+    python cps.py --help         # 传递参数给 copilot
+    python cps.py -p "写一个hello world"  # 传递参数给 copilot
 """
 import json
 import os
@@ -77,7 +78,10 @@ def select_provider():
             print("[ERROR] 请输入数字")
 
 
-def launch(provider):
+def launch(provider, args=None):
+    if args is None:
+        args = []
+
     env = os.environ.copy()
     env["COPILOT_PROVIDER_BASE_URL"] = provider["base_url"]
     env["COPILOT_MODEL"] = provider["model"]
@@ -96,7 +100,7 @@ def launch(provider):
     print(f"  Base URL: {provider['base_url']}")
     print()
 
-    subprocess.run(["copilot"], env=env)
+    subprocess.run(["copilot"] + args, env=env)
 
 
 if __name__ == "__main__":
@@ -104,15 +108,4 @@ if __name__ == "__main__":
         sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 
     provider = select_provider()
-
-    if "--print" in sys.argv:
-        print(f"Active: {provider['name']}")
-        print(f"  Type:      {provider.get('type', 'openai')}")
-        print(f"  Base URL:  {provider['base_url']}")
-        print(f"  Model:     {provider['model']}")
-        print(f"  API Key:   {'***' if provider.get('api_key') else '(none)'}")
-        print(f"  Offline:      {provider.get('offline', False)}")
-        print(f"  Max Output:   {provider.get('max_output_tokens') or '128000 (默认)'}")
-        print(f"  Max Prompt:   {provider.get('max_prompt_tokens') or '840000 (默认)'}")
-    else:
-        launch(provider)
+    launch(provider, sys.argv[1:])
